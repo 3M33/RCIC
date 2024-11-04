@@ -1,1 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Choice - Indian Cuisine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        /* Navigation */
+        nav {
+            background-color: #9A3412;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #B45309;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 4rem 1rem;
+            background-color: #FFF7ED;
+        }
+
+        .info-cards {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            color: #9A3412;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Menu Section */
+.menu-section {
+    padding: 4rem 1rem;
+    background-color: white;
+}
+
+.menu-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-category {
+    margin-bottom: 4rem;
+}
+
+.menu-category h2 {
+    color: #9A3412;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.menu-category h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #9A3412;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.menu-item {
+    background-color: #FFF7ED;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 2px dashed #E7E5E4;
+    padding-bottom: 0.5rem;
+}
+
+.menu-item-name {
+    font-weight: bold;
+    color: #292524;
+    font-size: 1.2rem;
+}
+
+.menu-item-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.price-tag {
+    color: #9A3412;
+    font-weight: bold;
+}
+
+.price-label {
+    font-size: 0.8rem;
+    color: #78716C;
+}
+
+.menu-item-description {
+    color: #57534E;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Update mobile responsiveness for new grid size */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-category h2 {
+        font-size: 2rem;
+    }
+}
+        /* Footer */
+        footer {
+            background-color: #9A3412;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #9A3412;
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Royal Choice</a>
+            <div class="nav-links">
+                <a href="#menu">Menu</a>
+                <a href="#info">Information</a>
+            </div>
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Royal Choice</h1>
+            <p>Experience the authentic flavors of India in every bite</p>
+        </div>
+    </div>
+
+    <section id="info" class="info-section">
+        <div class="info-cards">
+            <div class="info-card">
+                <h3>Contact</h3>
+                <p>Phone: 604-875-0003</p>
+                <p>Email: RoyalChoiceIndianCuisine@gmail.com</p>
+            </div>
+            <div class="info-card">
+                <h3>Location</h3>
+                <p>14779 108 Ave</p>
+                <p>Surrey, BC V3R 1V9</p>
+            </div>
+            <div class="info-card">
+                <h3>Hours</h3>
+                <p>11:00 AM - 11:00 PM</p>
+                <h3>Dine In</h3>
+                <p>11:00 AM - 10:00 PM</p>
+                
+             
+            </div>
+        </div>
+    </section>
+    
+    <section class="menu-section">
+                <div class="menu-content">
+                    
+                    <div class="menu-category">
+                        <h2>STARTERS</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Vegetable Pakoras</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$8.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Paneer Pakoras</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$11.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Pakoras</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Fish Pakora</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Prawn Pakora</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg Samosa (2pc) / Aloo Tikki (2pc)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$3.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Aloo Tikki(2pc) with Channa</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$8.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Crispy patties stuffed with chana and chef-traditional spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chana Samosa (2pcs)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$7.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Samosa with Chana and chef’s traditional spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg Spring Rolls(10 pcs)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$8.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Flatbread with stuffed vegetables</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Soya Champ (Chilli/Butter/Karahi/mint)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg. Manchurian(Dry/Gravy)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$11.99</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$14.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Deep fried mixed vegetables dumpling coated in soya sar & mixed chef's spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg Noodles(L)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Noodles cooked with vegetables and spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Noodles</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Noodles cooked with chicken & spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Channa Bhatura / Puri</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$9.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Deep fried bread served with chickpea curry</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chaat Papri</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$6.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Deep fried bread served with potatoes/ chickpeas/ yogurt/chutney & spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg Butter Pasta</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Vegetable pasta toasted with garlic/ capsicum/ onion /butter sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Pasta</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Pasta toasted with garlic/ capsicum/onion/ butter sauce/Chicken</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Fish Chilli Dry/ Chilly Chicken Dry(L)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veggie Mix Platter</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">(Paneer Pakora / Veggie Samosa /Veggie Pakora / Spring Rolls)</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Crispy Gobi Chilli</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Prawn Chilli</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.99</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">21.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>VEGGIE DISHES</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Yellow Dal Fry</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Made in soft cooking lentils in a pressure cooker or pot includes spices and ginger</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Dal Makhani / Tadka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cooked with butter and cream & simmered on low heat for that unique flavor</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Mix Tawa Veggie</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Vegetable with Indian spices fried in tawa</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Aloo Gobi</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cauliflower/potatoes/onion/tomatoes/ginger/garlic/spices /onion</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Bhindi do Pyaza</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">an Indian curry recipe which contains an onion and tomato gravy</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chana Masala</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">chickpeas with ginger/ garlic/ tomatoes/ herbs/ spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Palak Paneer</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Spinach cooked with cheese & spices/ ginger/garlic</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Malai Kofta</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Vegetable dumplings in creamy calzone & cashew sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veggie Korma</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Fresh vegetables with cashew nuts in a mild cream sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Paneer Methi Malai</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Made with fresh fenugreek leaves & soft chunks of paneer</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Shahi Paneer</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cheese in a special creamy tomato sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Kadhai Paneer</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cheese & spices sauteed in an Indian wok</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chilli Paneer (Dry/Gravy)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cheese/peppers/onions with soy chilli sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Paneer Tikka Masala</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">spices & grilled</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cheese marinated in yogurt</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Eggplant Bharta</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$12.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Prepared by eggplant that is grilled over charcoal or direct fire and served with spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Butter Paneer</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$13.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Paneer cooked in a creamy tomato-based gravy with butter and spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Paneer Bhurji</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$18.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Spiced scrambled paneer mixed with onions tomatoes and herbs</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>TANDOORI</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Pudina Paneer Tikka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Paneer chunks coated with mint & spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Tandoori Chicken (7pcs)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Fresh chicken leg marinated in cream curd & rare spices & barbecued in an earthen clay oven</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Tikka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Boneless pieces of chicken marinated in cream & rare spices & grilled in the tandoor</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Malai Chicken Tikka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Chicken malai tikka is juicy kababs on skewers that will simply melt in your mouth</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Tikka Kali Mirch</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">includes chicken with Indian herbs & spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Achari Chicken Tikka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">The recipe that's prepared by marinating boneless chicken chunks in a special spice blend known as Achari masala & yogurt</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veggie Mix Grill</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Marinated paneer/ cauliflower/capsicum</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Fish Tikka</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Boneless marinated chunks of fish cooked in a clay oven</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Tandoori Prawns</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$18.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Prawns marinated in Indian spices and grilled in our clay oven</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Seekh Kabab</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">chicken seekh kabab made with minced chicken also known as chicken keema that’s seasoned with spices</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>SEAFOOD</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Coconut Fish/ Prawn curry</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Fish(L)</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Prawn(L)</span>
+                                            <span class="price-tag">$20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cooked with coconut cream and chef’s spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Curry Fish/Prawn</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Fish(L)</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Prawn(L)</span>
+                                            <span class="price-tag">$20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cooked with onion/ginger/tomatoes & chef’s spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Kadahi Fish/Prawn</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Fish(L)</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Prawn(L)</span>
+                                            <span class="price-tag">$20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cooked with onion/ capsicum /ginger/tomatoes & chef’s spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chilli Fish/Prawn</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Fish(L)</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Prawn(L)</span>
+                                            <span class="price-tag">$20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cooked with garlic/ bell peppers/onion and deep-fried fish/ prawn</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Vindaloo Fish/ Prawn</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Fish(L)</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Prawn(L)</span>
+                                            <span class="price-tag">$20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">cooked with onion/ tomato gravy and rich spices with potatoes and vindaloo paste</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>CHICKEN SPECIALS</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Butter Chicken</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Boneless chicken cooked in our creamy sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Coconut Chicken Curry</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Marinated in special spices & cooked in coconut cream sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Curry</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Boneless chicken cooked with onion/ garlic/ tomatoes/coriander and cumin sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Kadhi Chicken</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Chicken cooked it's fresh onions/ tomatoes/green peppers & traditional Indian spices in an Indian wok</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Tikka Masala</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Vindaloo</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Boneless chicken cooked with home-ground red chiles and spices intensely flavoured with garlic and coconut</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chilli chicken dry/gravy</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$17.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Chicken cooked in a creamy cashew curry</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>LAMB/ GOAT SPECIALS</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Lamb/ Goat Curry</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$20.49</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cooked in fresh Indian chef’s spices/ garlic/ and ginger paste</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Lamb/ Goat Masala</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$20.49</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cooked with Indian chef’s herbs and traditional spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Lamb/ Goat Spinach</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$20.49</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Cooked spinach lamb with Indian chef’s herbs and traditional spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Butter Lamb</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Lamb cooked in a cream/cashew & cardamom sauce</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Korma Lamb/ Goat</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$21.49</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">savory lamb/goat cooked in zesty tangy curry sauce</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>BREAD & RICE</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Butter Naan</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$1.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Flatbread with butter spread</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Garlic Naan</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$2.75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Leavened bread with fresh garlic baked in a  clay oven</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Tandoor Roti</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$1.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Whole wheat bread baked in a tandoor</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Rumali Roti</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$2.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Unleavened Indian bread</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Bhatura</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$2.75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">A deep-fried leavened bread</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Stuffed Paratha</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$5.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Bread stuffed with aloo/ paneer/onion and baked in a clay oven</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Spinach Naan</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">baked in a clay oven</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$5.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Leavened bread stuffed with chopped spinach and cottage cheese</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Naan</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$6.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Stuffed with minced chicken and spices</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Kulcha</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$5.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Plain Rice</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$4.00 $6.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Kulcha Plate</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$15.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">(Channa masala/Raita/Gulab Jamun/ Achar/Salad)</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Pilau Rice</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$8.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Pilau rice is a great recipe for adding a powerful flavor to your rice</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chicken Biryani</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$16.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Chicken Biryani is a savory chicken and rice dish that includes layers of chicken/ rice & aromatics that are steamed together</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Lamb/ Goat Biryani</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$18.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Fried rice cooked with lamb/ goat which includes capsicum and fried onion</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Veg Biryani</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$14.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="menu-item-description">Vegetable Biryani is a mixed vegetables and rice dish which includes aromatic onion and capsicums/ that are steamed together</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>Side Dishes</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Dahi / Raita</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$4.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$6.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Salad</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$4.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Chutney/Pickle</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$1.50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h2>Beverages</h2>
+                        <div class="menu-grid">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Tea / Coffee</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$2.50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Lassi (Sweet / Salt)</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$4.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Mango Lassi/Shake</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$5.50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Soft Drink</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$2.00</span>
+                                        </div>
+                                        <div>
+                                            <span class="price-label">Large</span>
+                                            <span class="price-tag">$3.75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <span class="menu-item-name">Water Bottle</span>
+                                    <div class="menu-item-prices">
+                                        <div>
+                                            <span class="price-label">Regular</span>
+                                            <span class="price-tag">$1.50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+	//END MENU//
+
+    <footer>
+        <p>&copy; 2024 Royal Choice Indian Cuisine. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
